@@ -3,33 +3,23 @@ package edu.uw.ischool.erickuokuo.quizdroid
 import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 
 // MainActivity.kt
-
-
 class MainActivity : AppCompatActivity() {
-    private lateinit var topicListView: ListView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(edu.uw.ischool.erickuokuo.quizdroid.R.layout.activity_main)
 
-        topicListView = findViewById(R.id.topicListView)
+        val topics = listOf("Math", "Physics", "Marvel Super Heroes")
 
-        // Define a list of topics (hard-coded for this example).
-        val topics = arrayOf("Math", "Physics", "Marvel Super Heroes")
-
+        val topicListView = findViewById<ListView>(edu.uw.ischool.erickuokuo.quizdroid.R.id.topicListView)
         val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, topics)
         topicListView.adapter = adapter
 
-        topicListView.setOnItemClickListener { parent, view, position, id ->
-            // Start the Topic Overview activity for the selected topic.
+        topicListView.setOnItemClickListener { _, _, position, _ ->
             val selectedTopic = topics[position]
             val intent = Intent(this, TopicOverviewActivity::class.java)
             intent.putExtra("topic", selectedTopic)
